@@ -4,17 +4,17 @@ function Question({ question, onAnswered }) {
   const [timeRemaining, setTimeRemaining] = useState(10);
 
   // add useEffect code
-useEffect(() => {
-  if (timeRemaining === 0) {
-    setTimeRemaining(10)
-    onAnswered(false)
-  } else {
-    const countdown = setTimeout(() => setTimeRemaining(timeRemaining -1), 1000)
-    return function cleanup() {
-      clearTimeout(countdown)
+  useEffect(() => {
+    if (timeRemaining === 0) {
+      setTimeRemaining(10)
+      onAnswered(false)
+    } else {
+     const timer = setTimeout(() => setTimeRemaining(timeRemaining - 1), 1000)
+      return function cleanup () {
+      clearTimeout(timer)
+      }
     }
-  }
-}, [timeRemaining])
+  }, [timeRemaining])
 
   function handleAnswer(isCorrect) {
     setTimeRemaining(10);
@@ -48,22 +48,23 @@ export default Question;
 // and use setTimeout to run a callback 
 // function after 1 second.
 
-// import useEffect hook 
-// build useEffect function
-// setTimeout with 2nd arg 1000 which starts timeout func after one sec
-// pass setter func with time remaining dec -1
-// running a () => func after set to invoke it again to countdown
+//import useEffect
+//create useEffect func
+//setTimeout func to run a cb, 2nd arg is 1000
 
-// Inside the callback function for setTimeout,
+//  Inside the callback function for setTimeout,
 //  use the setTimeRemaining function to decrease 
 //  the amount of time remaining by 1 every 1 second.
 
 // When timeRemaining hits 0, do the following:
 
-// create conditional if timeR === 0 onanswered(false)
-// else setTimer is moved here
+// write condition timeR === 0, setTR(10) and onAnswered(false)
+
 
 // reset timeRemaining back to 10 seconds, 
 // so our next question will have a fresh timer; and
 // call the onAnswered callback prop with a value 
 // of false (onAnswered(false)), to trigger some behavior in the App component.
+// You should _also_ use the **cleanup function** for `useEffect` 
+// to clean up after
+// the timeout function.
